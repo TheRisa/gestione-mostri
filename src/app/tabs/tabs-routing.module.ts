@@ -12,6 +12,11 @@ const routes: Routes = [
         loadChildren: () => import('../lista-mostri/lista-mostri.module').then((m) => m.ListaMostriPageModule)
       },
       {
+        path: 'creazione-personaggio',
+        loadChildren: () =>
+          import('../creazione-personaggio/creazione-personaggio.module').then((m) => m.CreazionePersonaggioPageModule)
+      },
+      {
         path: '',
         redirectTo: '/tabs/lista-mostri',
         pathMatch: 'full'
