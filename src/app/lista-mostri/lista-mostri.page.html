@@ -1,0 +1,107 @@
+<ion-content [fullscreen]="true">
+  <!-- Aggiungi personaggio -->
+  <ion-row class="aggiungi-personaggio">
+    <ion-button shape="round" color="primary" (click)="addPg()"
+      ><ion-icon slot="icon-only" name="add-outline" color="light"></ion-icon
+    ></ion-button>
+  </ion-row>
+
+  <!-- Lista dei personaggi -->
+  <ion-card *ngFor="let personaggio of listaPersonaggi; let personaggioIndex = index">
+    <!-- Info generali -->
+    <ion-card-header (click)="attivaPersonaggio(personaggioIndex)">
+      <ion-card-title
+        >{{personaggio.nome}} - {{personaggio.hpAttuali}} PF
+        <ion-button shape="round" color="danger" (click)="delete(personaggioIndex)"
+          ><ion-icon slot="icon-only" name="skull-outline"></ion-icon></ion-button
+      ></ion-card-title>
+      <ion-card-subtitle>{{personaggio.rageType}} alla rage</ion-card-subtitle>
+    </ion-card-header>
+
+    <!-- Info specifiche -->
+    <ion-card-content *ngIf="personaggioIndex === selectedIndex">
+      <div class="card-content">
+        <ion-row class="ion-align-items-center">
+          <!-- Hp e pf tmp -->
+          <ion-col size="4">
+            <ion-col><strong>PF:</strong> {{personaggio.hpAttuali}}/{{personaggio.hpMax}}</ion-col>
+            <ion-col><strong>PF TMP:</strong>{{personaggio.pfTmpAttuali}}/{{personaggio.hpMax / 2}}</ion-col>
+          </ion-col>
+          <!-- Dur e rid -->
+          <ion-col size="4">
+            <ion-col><strong>RID:</strong> {{personaggio.rid}}/{{personaggio.ridMax}}</ion-col>
+            <ion-col><strong>DUR:</strong>{{personaggio.dur}}/{{personaggio.durMax}}</ion-col>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <!-- Danni -->
+          <ion-col size="2" style="padding-right: 1rem">
+            <ion-item color="light">
+              <ion-input label="Danni" placeholder="Inserisci i danni" type="number" [(ngModel)]="danni"></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-button color="dark" (click)="calcolaDanni(personaggioIndex)"
+            ><ion-icon slot="icon-only" name="add-outline" color="light"></ion-icon
+          ></ion-button>
+          <!-- Danni Puri -->
+          <ion-col size="2" style="padding-right: 1rem">
+            <ion-item color="light">
+              <ion-input
+                label="Danni"
+                placeholder="Inserisci i danni"
+                type="number"
+                [(ngModel)]="danniPuri"
+              ></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-button color="dark" (click)="calcolaDanniPuri(personaggioIndex)"
+            ><ion-icon slot="icon-only" name="add-outline" color="light"></ion-icon
+          ></ion-button>
+          <!-- Cure -->
+          <ion-col size="2" style="padding-right: 1rem">
+            <ion-item color="light">
+              <ion-input label="Cure" placeholder="Inserisci le cure" type="number" [(ngModel)]="cure"></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-button color="dark" (click)="calcolaCure(personaggioIndex)"
+            ><ion-icon slot="icon-only" name="add-outline" color="light"></ion-icon
+          ></ion-button>
+          <!-- Scudi -->
+          <ion-col size="2" style="padding-right: 1rem">
+            <ion-item color="light">
+              <ion-input label="Scudi" placeholder="Inserisci gli scudi" type="number" [(ngModel)]="scudi"></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-button color="dark" (click)="calcolaScudi(personaggioIndex)"
+            ><ion-icon slot="icon-only" name="add-outline" color="light"></ion-icon
+          ></ion-button>
+        </ion-row>
+
+        <!-- Abilità -->
+        <ion-row style="padding-top: 1em">
+          <strong>Abilità:</strong>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ul *ngFor="let abilita of personaggio.abilita" (click)="abilita.read = !abilita.read" class="hover">
+              <p [ngStyle]="{'text-decoration': abilita.read ? 'line-through' : 'none'}">{{abilita.value}}</p>
+            </ul>
+          </ion-col>
+        </ion-row>
+
+        <!-- Note -->
+        <ion-row style="padding-top: 1em">
+          <strong>Note:</strong>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ul *ngFor="let note of personaggio.note" (click)="note.read = !note.read" class="hover">
+              <p [ngStyle]="{'text-decoration': note.read ? 'line-through' : 'none'}">{{note.value}}</p>
+            </ul>
+          </ion-col>
+        </ion-row>
+      </div>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

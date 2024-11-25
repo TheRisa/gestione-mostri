@@ -1,0 +1,32 @@
+ion-content {
+  --ion-background-color: lightcoral;
+}
+
+.aggiungi-personaggio {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 2em;
+}
+
+ion-card {
+  background-color: white;
+}
+
+ion-card-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+ion-card-content {
+  border-top: solid 2px lightgray;
+}
+
+.card-content {
+  padding-top: 1em;
+}
+
+[class^='col'] {
+  border: 1px solid red;
+}
