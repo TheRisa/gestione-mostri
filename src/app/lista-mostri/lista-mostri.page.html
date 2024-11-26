@@ -1,17 +1,18 @@
 <ion-content [fullscreen]="true">
-  <!-- Aggiungi personaggio -->
+  <!-- Reset totale -->
   <ion-row class="aggiungi-personaggio">
-    <ion-button shape="round" color="primary" (click)="addPg()"
-      ><ion-icon slot="icon-only" name="add-outline" color="light"></ion-icon
+    <ion-button shape="round" color="primary" (click)="reset()"
+      ><ion-icon slot="icon-only" name="refresh-outline" color="light"></ion-icon
     ></ion-button>
   </ion-row>
 
   <!-- Lista dei personaggi -->
-  <ion-card *ngFor="let personaggio of listaPersonaggi; let personaggioIndex = index">
+  <ion-card *ngFor="let personaggio of combactService.listaPersonaggi; let personaggioIndex = index">
     <!-- Info generali -->
     <ion-card-header (click)="attivaPersonaggio(personaggioIndex)">
       <ion-card-title
-        >{{personaggio.nome}} - {{personaggio.hpAttuali}} PF
+        >{{personaggio.nome}} {{personaggio.index !== undefined ? '(' + personaggio.index + ') ' : ''}}-
+        {{personaggio.hpAttuali}} PF
         <ion-button shape="round" color="danger" (click)="delete(personaggioIndex)"
           ><ion-icon slot="icon-only" name="skull-outline"></ion-icon></ion-button
       ></ion-card-title>
@@ -48,7 +49,7 @@
           <ion-col size="2" style="padding-right: 1rem">
             <ion-item color="light">
               <ion-input
-                label="Danni"
+                label="Danni puri"
                 placeholder="Inserisci i danni"
                 type="number"
                 [(ngModel)]="danniPuri"

@@ -1,13 +1,69 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>creazione-personaggio</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">creazione-personaggio</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <!-- Titolo + crea-nuovo -->
+  <ion-row class="ion-align-items-center">
+    <p class="title">Lista dei Mostri</p>
+    <ion-button class="crea-button" color="dark" (click)="creaNuovo()">Crea nuovo</ion-button>
+  </ion-row>
+
+  <!-- Lista dei personaggi -->
+  <ion-card *ngFor="let personaggio of listaPersonaggi; let personaggioIndex = index">
+    <!-- Info generali -->
+    <ion-card-header>
+      <ion-card-title>
+        <p (click)="attivaPersonaggio(personaggioIndex)" class="ion-no-margin">{{personaggio.nome}}</p>
+        <ion-button shape="round" color="success" (click)="add(personaggioIndex)"
+          ><ion-icon slot="icon-only" name="add-outline"></ion-icon
+        ></ion-button>
+        <ion-button shape="round" color="medium" (click)="delete(personaggioIndex)"
+          ><ion-icon slot="icon-only" name="create-outline" color="light"></ion-icon
+        ></ion-button>
+        <ion-button shape="round" color="danger" (click)="modify(personaggioIndex)"
+          ><ion-icon slot="icon-only" name="trash-outline"></ion-icon
+        ></ion-button>
+      </ion-card-title>
+      <ion-card-subtitle>{{personaggio.rageType}} alla rage</ion-card-subtitle>
+    </ion-card-header>
+
+    <!-- Info specifiche -->
+    <ion-card-content *ngIf="personaggioIndex === selectedIndex">
+      <div class="card-content">
+        <ion-row class="ion-align-items-center">
+          <!-- Hp e pf tmp -->
+          <ion-col size="4">
+            <ion-col><strong>PF:</strong>{{personaggio.hpMax}}</ion-col>
+            <ion-col><strong>PF TMP:</strong>{{personaggio.hpMax / 2}}</ion-col>
+          </ion-col>
+          <!-- Dur e rid -->
+          <ion-col size="4">
+            <ion-col><strong>RID:</strong>{{personaggio.ridMax}}</ion-col>
+            <ion-col><strong>DUR:</strong>{{personaggio.durMax}}</ion-col>
+          </ion-col>
+        </ion-row>
+
+        <!-- Abilità -->
+        <ion-row style="padding-top: 1em">
+          <strong>Abilità:</strong>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ul *ngFor="let abilita of personaggio.abilita">
+              <p>{{abilita.value}}</p>
+            </ul>
+          </ion-col>
+        </ion-row>
+
+        <!-- Note -->
+        <ion-row style="padding-top: 1em">
+          <strong>Note:</strong>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ul *ngFor="let note of personaggio.note" (click)="note.read = !note.read" class="hover">
+              <p [ngStyle]="{'text-decoration': note.read ? 'line-through' : 'none'}">{{note.value}}</p>
+            </ul>
+          </ion-col>
+        </ion-row>
+      </div>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

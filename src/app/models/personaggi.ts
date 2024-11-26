@@ -9,6 +9,7 @@ export interface Personaggio {
   note: readString[];
   abilita: readString[];
   nome: string;
+  index?: number;
   rageType?: 'vincolato' | 'dipendente' | 'assuefatto' | 'immune';
 }
 
