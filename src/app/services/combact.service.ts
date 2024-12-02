@@ -104,6 +104,31 @@ export class CombactService {
   }
 
   /**
+   * Applica danni magici al personaggio
+   *
+   * @param index Indice del personaggio danneggiato
+   * @param danniMagici Danni magici inflitti
+   */
+  public applicaDanniMagici(index: number, danniMagici: number): void {
+    if (!danniMagici || danniMagici < 0 || index < 0 || index >= this.listaPersonaggiAttivi.length) {
+      return;
+    }
+
+    // Per prima cosa assorbo i danni con i pf tmp
+    this.listaPersonaggiAttivi[index].pfTmpAttuali = this.listaPersonaggiAttivi[index].pfTmpAttuali - danniMagici;
+
+    // Se i pf tmp sono sotto 0 allora devo prima applicare l'armor poi i danni ai pf attuali
+    if (this.listaPersonaggiAttivi[index].pfTmpAttuali < 0) {
+      // Avanzo dei danni dai pf tmp (il danno è l'overflow cambiato di segno)
+      let overflowDanno = this.listaPersonaggiAttivi[index].pfTmpAttuali * -1;
+      // Evito che i pf tmp siano < 0
+      this.listaPersonaggiAttivi[index].pfTmpAttuali = 0;
+
+      // A questo punto faccio danni agli hp effettivi
+      this.listaPersonaggiAttivi[index].hpAttuali = this.listaPersonaggiAttivi[index].hpAttuali - overflowDanno;
+    }
+  }
+  /**
    * Applica danni puri al personaggio
    *
    * @param index Indice del personaggio danneggiato

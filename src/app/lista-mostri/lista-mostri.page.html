@@ -6,13 +6,18 @@
     ></ion-button>
   </ion-row>
 
+  <!-- Messaggio per nessuno pg -->
+  <p class="no-pg" *ngIf="combactService.listaPersonaggi.length === 0">
+    Aggiungi un personaggio selezionandolo dalla sezione "Crea"
+  </p>
+
   <!-- Lista dei personaggi -->
   <ion-card *ngFor="let personaggio of combactService.listaPersonaggi; let personaggioIndex = index">
     <!-- Info generali -->
     <ion-card-header (click)="attivaPersonaggio(personaggioIndex)">
-      <ion-card-title
+      <ion-card-title [ngClass]="personaggio.hpAttuali > 0 ? '' : 'is-dead'"
         >{{personaggio.nome}} {{personaggio.index !== undefined ? '(' + personaggio.index + ') ' : ''}}-
-        {{personaggio.hpAttuali}} PF
+        {{personaggio.rapBase}} %
         <ion-button shape="round" color="danger" (click)="delete(personaggioIndex)"
           ><ion-icon slot="icon-only" name="skull-outline"></ion-icon></ion-button
       ></ion-card-title>
@@ -33,48 +38,57 @@
             <ion-col><strong>RID:</strong> {{personaggio.rid}}/{{personaggio.ridMax}}</ion-col>
             <ion-col><strong>DUR:</strong>{{personaggio.dur}}/{{personaggio.durMax}}</ion-col>
           </ion-col>
+          <!-- dA e dM -->
+          <ion-col size="4">
+            <ion-col><strong>dA:</strong> {{personaggio.dA}}</ion-col>
+            <ion-col><strong>dM:</strong>{{personaggio.dM}}</ion-col>
+          </ion-col>
         </ion-row>
 
         <ion-row>
           <!-- Danni -->
           <ion-col size="2" style="padding-right: 1rem">
             <ion-item color="light">
-              <ion-input label="Danni" placeholder="Inserisci i danni" type="number" [(ngModel)]="danni"></ion-input>
+              <ion-input labelPlacement="floating" label="Fisici" type="number" [(ngModel)]="danni"></ion-input>
             </ion-item>
           </ion-col>
-          <ion-button color="dark" (click)="calcolaDanni(personaggioIndex)"
+          <ion-button color="dark" class="add-button" (click)="calcolaDanni(personaggioIndex)"
+            ><ion-icon slot="icon-only" name="add-outline" color="light"></ion-icon
+          ></ion-button>
+          <!-- Danni Magici -->
+          <ion-col size="2" style="padding-right: 1rem">
+            <ion-item color="light">
+              <ion-input labelPlacement="floating" label="Magici" type="number" [(ngModel)]="danni"></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-button color="dark" class="add-button" (click)="calcolaDanni(personaggioIndex)"
             ><ion-icon slot="icon-only" name="add-outline" color="light"></ion-icon
           ></ion-button>
           <!-- Danni Puri -->
           <ion-col size="2" style="padding-right: 1rem">
             <ion-item color="light">
-              <ion-input
-                label="Danni puri"
-                placeholder="Inserisci i danni"
-                type="number"
-                [(ngModel)]="danniPuri"
-              ></ion-input>
+              <ion-input labelPlacement="floating" label="Puri" type="number" [(ngModel)]="danniPuri"></ion-input>
             </ion-item>
           </ion-col>
-          <ion-button color="dark" (click)="calcolaDanniPuri(personaggioIndex)"
+          <ion-button color="dark" class="add-button" (click)="calcolaDanniPuri(personaggioIndex)"
             ><ion-icon slot="icon-only" name="add-outline" color="light"></ion-icon
           ></ion-button>
           <!-- Cure -->
           <ion-col size="2" style="padding-right: 1rem">
             <ion-item color="light">
-              <ion-input label="Cure" placeholder="Inserisci le cure" type="number" [(ngModel)]="cure"></ion-input>
+              <ion-input labelPlacement="floating" label="Cure" type="number" [(ngModel)]="cure"></ion-input>
             </ion-item>
           </ion-col>
-          <ion-button color="dark" (click)="calcolaCure(personaggioIndex)"
+          <ion-button color="dark" class="add-button" (click)="calcolaCure(personaggioIndex)"
             ><ion-icon slot="icon-only" name="add-outline" color="light"></ion-icon
           ></ion-button>
           <!-- Scudi -->
           <ion-col size="2" style="padding-right: 1rem">
             <ion-item color="light">
-              <ion-input label="Scudi" placeholder="Inserisci gli scudi" type="number" [(ngModel)]="scudi"></ion-input>
+              <ion-input labelPlacement="floating" label="Scudi" type="number" [(ngModel)]="scudi"></ion-input>
             </ion-item>
           </ion-col>
-          <ion-button color="dark" (click)="calcolaScudi(personaggioIndex)"
+          <ion-button color="dark" class="add-button" (click)="calcolaScudi(personaggioIndex)"
             ><ion-icon slot="icon-only" name="add-outline" color="light"></ion-icon
           ></ion-button>
         </ion-row>

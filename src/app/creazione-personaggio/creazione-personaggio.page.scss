@@ -36,3 +36,20 @@ ion-card-content {
   height: 50px;
   padding-left: 2rem;
 }
+
+.nome-pg {
+  width: 500px;
+  border-radius: 15px;
+  border: solid 2px lightblue;
+  padding: 5px 20px;
+}
+
+.nome-pg-selezionato {
+  background-color: lightblue;
+  color: white;
+}
+
+.nome-pg:hover {
+  background-color: lightblue;
+  color: white;
+}

@@ -1,0 +1,132 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{ title }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+  <ion-row>
+    <!-- Nome -->
+    <ion-col size="12" style="padding-right: 1rem">
+      <ion-item color="light">
+        <ion-input label="Nome *" labelPlacement="floating" [(ngModel)]="personaggio.nome"></ion-input>
+      </ion-item>
+    </ion-col>
+    <!-- HP -->
+    <ion-col size="4" style="padding-right: 1rem">
+      <ion-item color="light">
+        <ion-input label="PF Max *" labelPlacement="floating" type="number" [(ngModel)]="personaggio.hpMax"></ion-input>
+      </ion-item>
+    </ion-col>
+    <!-- DUR -->
+    <ion-col size="4" style="padding-right: 1rem">
+      <ion-item color="light">
+        <ion-input
+          label="DUR Max *"
+          labelPlacement="floating"
+          type="number"
+          [(ngModel)]="personaggio.durMax"
+        ></ion-input>
+      </ion-item>
+    </ion-col>
+    <!-- RID -->
+    <ion-col size="4" style="padding-right: 1rem">
+      <ion-item color="light">
+        <ion-input
+          label="RID Max *"
+          labelPlacement="floating"
+          type="number"
+          [(ngModel)]="personaggio.ridMax"
+        ></ion-input>
+      </ion-item>
+    </ion-col>
+    <!-- dA -->
+    <ion-col size="4" style="padding-right: 1rem">
+      <ion-item color="light">
+        <ion-input label="dA *" labelPlacement="floating" [(ngModel)]="personaggio.dA"></ion-input>
+      </ion-item>
+    </ion-col>
+    <!-- dM -->
+    <ion-col size="4" style="padding-right: 1rem">
+      <ion-item color="light">
+        <ion-input label="dM" labelPlacement="floating" [(ngModel)]="personaggio.dM"></ion-input>
+      </ion-item>
+    </ion-col>
+    <!-- Rapidità Base -->
+    <ion-col size="4" style="padding-right: 1rem">
+      <ion-item color="light">
+        <ion-input
+          label="Rap Base *"
+          labelPlacement="floating"
+          type="number"
+          [(ngModel)]="personaggio.rapBase"
+        ></ion-input>
+      </ion-item>
+    </ion-col>
+
+    <!-- Tipo di rage -->
+    <ion-col size="12">
+      <ion-item>
+        <ion-select label="Tipo di Rage *" labelPlacement="floating" [(ngModel)]="personaggio.rageType">
+          <ion-select-option value="vincolato">Vincolato</ion-select-option>
+          <ion-select-option value="assuefatto">Assuefatto</ion-select-option>
+          <ion-select-option value="dipendente">Dipendente</ion-select-option>
+          <ion-select-option value="immune">Immune</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+
+  <!-- Abilità -->
+  <ion-row style="margin-top: 2rem">
+    <ion-col size="12"><b>Abilità:</b></ion-col>
+
+    <ion-col size="12" *ngFor="let abilita of personaggio.abilita; let abIndex = index">
+      <ion-item style="width: 100%">
+        <ion-textarea
+          [label]="'Abilità ' + (abIndex + 1) + ':'"
+          labelPlacement="floating"
+          placeholder="Testo abilità"
+          [(ngModel)]="abilita.value"
+        ></ion-textarea>
+      </ion-item>
+    </ion-col>
+    <!-- Aggiungi -->
+    <ion-col size="12" style="justify-content: center; display: flex">
+      <ion-button shape="round" color="medium" (click)="aggiungiAbilita()"
+        ><ion-icon slot="icon-only" name="add-outline"></ion-icon
+      ></ion-button>
+    </ion-col>
+  </ion-row>
+
+  <!-- Note -->
+  <ion-row style="margin-top: 2rem">
+    <ion-col size="12"><b>Note:</b></ion-col>
+
+    <ion-col size="12" *ngFor="let nota of personaggio.note; let notaIndex = index">
+      <ion-item style="width: 100%">
+        <ion-textarea
+          [label]="'Nota ' + (notaIndex + 1) + ':'"
+          labelPlacement="floating"
+          placeholder="Testo nota"
+          [(ngModel)]="nota.value"
+        ></ion-textarea>
+      </ion-item>
+    </ion-col>
+    <!-- Aggiungi -->
+    <ion-col size="12" style="justify-content: center; display: flex">
+      <ion-button shape="round" color="medium" (click)="aggiungiNota()"
+        ><ion-icon slot="icon-only" name="add-outline"></ion-icon
+      ></ion-button>
+    </ion-col>
+  </ion-row>
+
+  <!-- Conferma / annulla -->
+  <ion-row style="padding-top: 2rem">
+    <ion-col size="6">
+      <ion-button expand="block" (click)="cancel()" color="danger">Annulla</ion-button>
+    </ion-col>
+    <ion-col size="6">
+      <ion-button expand="block" (click)="confirm()">Conferma</ion-button>
+    </ion-col>
+  </ion-row>
+</ion-content>

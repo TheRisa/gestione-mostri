@@ -26,3 +26,21 @@ ion-card-content {
 .card-content {
   padding-top: 1em;
 }
+
+.add-button {
+  padding-top: 10px;
+  height: 35px;
+}
+
+.no-pg {
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+  margin: 4rem 0;
+  width: 100%;
+  text-align: center;
+}
+
+.is-dead {
+  text-decoration: line-through;
+}
