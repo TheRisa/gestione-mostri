@@ -12,6 +12,8 @@ export class ListaMostriPage implements OnInit {
   public selectedIndex: number | undefined = undefined;
   /** NgModel per i danni */
   public danni: number | undefined = undefined;
+  /** NgModel per i danni magici */
+  public danniMagici: number | undefined = undefined;
   /** NgModel per i danni puri */
   public danniPuri: number | undefined = undefined;
   /** NgModel per le cure */
@@ -83,6 +85,19 @@ export class ListaMostriPage implements OnInit {
     }
 
     this.combactService.applicaDanni(index, this.danni);
+  }
+
+  /**
+   * Metodo per calcolare i danni magici inseriti
+   *
+   * @param index Indice per pesonaggio su cui aggiungere i danni
+   */
+  public calcolaDanniMagici(index: number): void {
+    if (!this.danniMagici || this.danniMagici < 0) {
+      return;
+    }
+
+    this.combactService.applicaDanniMagici(index, this.danniMagici);
   }
 
   /**
