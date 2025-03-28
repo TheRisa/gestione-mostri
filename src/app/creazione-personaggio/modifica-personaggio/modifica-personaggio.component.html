@@ -39,6 +39,17 @@
         ></ion-input>
       </ion-item>
     </ion-col>
+    <!-- Rapidità Base -->
+    <ion-col size="4" style="padding-right: 1rem">
+      <ion-item color="light">
+        <ion-input
+          label="Rap Base *"
+          labelPlacement="floating"
+          type="number"
+          [(ngModel)]="personaggio.rapBase"
+        ></ion-input>
+      </ion-item>
+    </ion-col>
     <!-- dA -->
     <ion-col size="4" style="padding-right: 1rem">
       <ion-item color="light">
@@ -51,15 +62,32 @@
         <ion-input label="dM" labelPlacement="floating" [(ngModel)]="personaggio.dM"></ion-input>
       </ion-item>
     </ion-col>
-    <!-- Rapidità Base -->
+    <!-- Crit -->
     <ion-col size="4" style="padding-right: 1rem">
       <ion-item color="light">
         <ion-input
-          label="Rap Base *"
+          label="Crit arma *"
           labelPlacement="floating"
           type="number"
-          [(ngModel)]="personaggio.rapBase"
+          [(ngModel)]="personaggio.critArma"
         ></ion-input>
+      </ion-item>
+    </ion-col>
+    <!-- TxC -->
+    <ion-col size="4" style="padding-right: 1rem">
+      <ion-item color="light">
+        <ion-input
+          label="Tiro per colpire *"
+          labelPlacement="floating"
+          type="number"
+          [(ngModel)]="personaggio.txcAttaccoBase"
+        ></ion-input>
+      </ion-item>
+    </ion-col>
+    <!-- Gittata -->
+    <ion-col size="4" style="padding-right: 1rem">
+      <ion-item color="light">
+        <ion-input label="Gittata" labelPlacement="floating" [(ngModel)]="personaggio.gittata"></ion-input>
       </ion-item>
     </ion-col>
 

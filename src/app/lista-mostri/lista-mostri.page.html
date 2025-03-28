@@ -29,19 +29,22 @@
       <div class="card-content">
         <ion-row class="ion-align-items-center">
           <!-- Hp e pf tmp -->
-          <ion-col size="4">
+          <ion-col size="2">
             <ion-col><strong>PF:</strong> {{personaggio.hpAttuali}}/{{personaggio.hpMax}}</ion-col>
             <ion-col><strong>PF TMP:</strong>{{personaggio.pfTmpAttuali}}/{{personaggio.hpMax / 2}}</ion-col>
           </ion-col>
           <!-- Dur e rid -->
-          <ion-col size="4">
+          <ion-col size="2">
             <ion-col><strong>RID:</strong> {{personaggio.rid}}/{{personaggio.ridMax}}</ion-col>
             <ion-col><strong>DUR:</strong>{{personaggio.dur}}/{{personaggio.durMax}}</ion-col>
           </ion-col>
           <!-- dA e dM -->
-          <ion-col size="4">
+          <ion-col size="8">
             <ion-col><strong>dA:</strong> {{personaggio.dA}}</ion-col>
-            <ion-col><strong>dM:</strong>{{personaggio.dM}}</ion-col>
+            <ion-col><strong>dM:</strong>{{personaggio.dM ? personaggio.dM : 'Ø'}}</ion-col>
+            <ion-col><strong>crit:</strong>{{personaggio.critArma}}</ion-col>
+            <ion-col><strong>txc:</strong>{{personaggio.txcAttaccoBase}}</ion-col>
+            <ion-col><strong>gittata:</strong>{{personaggio.gittata ? personaggio.gittata : '1-1'}}</ion-col>
           </ion-col>
         </ion-row>
 

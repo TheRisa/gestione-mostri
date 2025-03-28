@@ -34,7 +34,9 @@ export class ModificaPersonaggioComponent implements OnInit {
     rapBase: 0,
     rid: 0,
     ridMax: 0,
-    rageType: ''
+    rageType: '',
+    critArma: 2,
+    txcAttaccoBase: 8
   };
 
   /** Costruttore della classe */
@@ -66,9 +68,6 @@ export class ModificaPersonaggioComponent implements OnInit {
     }
 
     // Rimuovo abilita e note vuote
-    console.log(this.personaggio);
-    console.log(this.personaggio.abilita);
-    console.log(this.personaggio.note);
     this.personaggio.abilita = this.personaggio.abilita.filter((abilita) => !!abilita.value);
     this.personaggio.note = this.personaggio.note.filter((nota) => !!nota.value);
     this.modalCtrl.dismiss(this.personaggio, 'confirm');
@@ -87,7 +86,9 @@ export class ModificaPersonaggioComponent implements OnInit {
       this.personaggio.ridMax == undefined ||
       !this.personaggio.dA ||
       !this.personaggio.rapBase ||
-      !this.personaggio.rageType
+      !this.personaggio.rageType ||
+      !this.personaggio.critArma ||
+      !this.personaggio.txcAttaccoBase
     );
   }
 

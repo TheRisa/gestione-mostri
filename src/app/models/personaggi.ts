@@ -9,6 +9,9 @@ export interface Personaggio {
   note: readString[];
   dA: string;
   dM?: string;
+  critArma: number;
+  txcAttaccoBase: number;
+  gittata?: string;
   abilita: readString[];
   nome: string;
   rapBase: number;

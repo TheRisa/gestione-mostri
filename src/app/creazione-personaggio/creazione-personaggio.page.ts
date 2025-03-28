@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Personaggio } from '../models';
 import { CombactService, StorageService } from '../services';
-import { AlertController, ModalController } from '@ionic/angular';
+import { AlertController, ModalController, ToastController } from '@ionic/angular';
 import { ModificaPersonaggioComponent } from './modifica-personaggio/modifica-personaggio.component';
 import { LISTA_PERSONAGGI } from '../constants';
 
@@ -11,8 +11,12 @@ import { LISTA_PERSONAGGI } from '../constants';
   styleUrls: ['./creazione-personaggio.page.scss']
 })
 export class CreazionePersonaggioPage implements OnInit {
+  /** NgModel per json di creazione */
+  public jsonCreazione = '';
+
   /** Lista dei personaggi da visualizzare */
   public listaPersonaggi: Personaggio[] = [];
+
   /** Indice del personaggio selezioanto */
   public selectedIndex: number | undefined = undefined;
 
@@ -21,6 +25,7 @@ export class CreazionePersonaggioPage implements OnInit {
     private combattimentoService: CombactService,
     private modalCtrl: ModalController,
     private alertController: AlertController,
+    private toastController: ToastController,
     private storageService: StorageService
   ) {}
 
@@ -62,8 +67,63 @@ export class CreazionePersonaggioPage implements OnInit {
     // Aggiungo personaggio
     const { data, role } = await modal.onWillDismiss();
     if (role === 'confirm' && data) {
-      this.listaPersonaggi.push(data);
+      this.controllaEInserisciPersonaggio(data);
     }
+  }
+
+  /**
+   * Creazione di nuovo mostro partendo da json
+   */
+  public async creaNuovoDaJson(): Promise<void> {
+    // Nessun json inserito
+    if (!this.jsonCreazione) {
+      const toastNoJson = await this.toastController.create({
+        message: 'Inserire un json',
+        duration: 3000
+      });
+      toastNoJson.present();
+      return;
+    }
+
+    // Conversione input in json
+    let json = null;
+    try {
+      json = JSON.parse(this.jsonCreazione);
+    } catch {
+      const toastJsonErrato = await this.toastController.create({
+        message: 'Il json inserito non è valido',
+        duration: 3000
+      });
+      toastJsonErrato.present();
+      return;
+    }
+
+    // Aggiunta personaggio
+    if (json) {
+      this.controllaEInserisciPersonaggio(json);
+      this.jsonCreazione = '';
+    }
+  }
+
+  /**
+   * Passando un personaggio verifica che sia valido, non ripetuto e lo inserisce in storage e lista
+   *
+   * @param personaggio Personaggio da inserire
+   * @returns
+   */
+  private async controllaEInserisciPersonaggio(personaggio: Personaggio): Promise<void> {
+    // Personaggio già presente
+    if (this.listaPersonaggi.find((pers) => pers.nome === personaggio.nome)) {
+      const toastJsonErrato = await this.toastController.create({
+        message: `${personaggio.nome} è già stato inserito`,
+        duration: 3000
+      });
+      toastJsonErrato.present();
+      return;
+    }
+
+    this.listaPersonaggi.push(personaggio);
+    this.storageService.set(LISTA_PERSONAGGI, this.listaPersonaggi);
   }
 
   /**

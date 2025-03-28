@@ -3,6 +3,12 @@
   <ion-row class="ion-align-items-center">
     <p class="title">Lista dei Mostri</p>
     <ion-button class="crea-button" color="dark" (click)="creaNuovo()">Crea nuovo</ion-button>
+
+    <!-- JSON -->
+    <ion-item>
+      <ion-input label="JSON" labelPlacement="floating" [(ngModel)]="jsonCreazione"></ion-input>
+    </ion-item>
+    <ion-button class="crea-button" color="light" (click)="creaNuovoDaJson()">Crea da json</ion-button>
   </ion-row>
 
   <!-- Lista dei personaggi -->
@@ -36,25 +42,37 @@
         <ion-row class="ion-align-items-center">
           <!-- Hp -->
           <ion-col size="1">
-            <ion-col><strong>PF:</strong>{{personaggio.hpMax}}</ion-col>
+            <ion-col><strong>PF: </strong>{{personaggio.hpMax}}</ion-col>
           </ion-col>
           <!-- Dur e rid -->
           <ion-col size="1">
-            <ion-col><strong>RID:</strong>{{personaggio.ridMax}}</ion-col>
+            <ion-col><strong>RID: </strong>{{personaggio.ridMax}}</ion-col>
           </ion-col>
           <ion-col size="1">
-            <ion-col><strong>DUR:</strong>{{personaggio.durMax}}</ion-col>
+            <ion-col><strong>DUR: </strong>{{personaggio.durMax}}</ion-col>
           </ion-col>
           <!-- dA e dM -->
           <ion-col size="1">
-            <ion-col><strong>dA:</strong>{{personaggio.dA}}</ion-col>
+            <ion-col><strong>dA: </strong>{{personaggio.dA}}</ion-col>
           </ion-col>
           <ion-col size="1">
-            <ion-col><strong>dM:</strong>{{personaggio.dM}}</ion-col>
+            <ion-col><strong>dM: </strong>{{personaggio.dM}}</ion-col>
+          </ion-col>
+          <!-- Crit arma -->
+          <ion-col size="1">
+            <ion-col><strong>crit: </strong>{{personaggio.critArma}}</ion-col>
+          </ion-col>
+          <!-- Gittata arma -->
+          <ion-col size="1">
+            <ion-col><strong>Gittata: </strong>{{personaggio.gittata ? personaggio.gittata : '1-1'}}</ion-col>
+          </ion-col>
+          <!-- Tiro per attacco base -->
+          <ion-col size="1">
+            <ion-col><strong>TxC: </strong>{{personaggio.txcAttaccoBase}}</ion-col>
           </ion-col>
           <!-- Rapidità base -->
           <ion-col size="1">
-            <ion-col><strong>Rap:</strong>{{personaggio.rapBase}}</ion-col>
+            <ion-col><strong>Rap: </strong>{{personaggio.rapBase}}</ion-col>
           </ion-col>
         </ion-row>
 
