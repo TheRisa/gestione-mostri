@@ -106,6 +106,24 @@ export class CreazionePersonaggioPage implements OnInit {
   }
 
   /**
+   * Passando l'indice del mostro cliccato, si copia nella clipboard utente il json del mostro
+   *
+   * @param index Indice del mostro selezionato
+   */
+  public async copyJson(index: number): Promise<void> {
+    try {
+      await navigator.clipboard.writeText(JSON.stringify(this.listaPersonaggi[index]));
+      const toastJsonErrato = await this.toastController.create({
+        message: 'I dati del mostro sono stati copiati negli appunti',
+        duration: 2000
+      });
+      toastJsonErrato.present();
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  /**
    * Passando un personaggio verifica che sia valido, non ripetuto e lo inserisce in storage e lista
    *
    * @param personaggio Personaggio da inserire
