@@ -6,7 +6,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ionic serve",
-    "build": "ionic build",
+    "build": "ionic build -- --base-href=/gestione-mostri/",
+    "deploy": "npx cpx 'www/index.html' 'www/404.html' && npx angular-cli-ghpages --dir=www --branch=master",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "ng lint"
