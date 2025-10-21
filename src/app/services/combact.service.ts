@@ -176,8 +176,8 @@ export class CombactService {
     // I danni puri bypassano tutte le difese
     this.listaPersonaggi[index].pfTmpAttuali = this.listaPersonaggi[index].pfTmpAttuali + scudi;
     // Evito overflow degli hp
-    if (this.listaPersonaggi[index].pfTmpAttuali > this.listaPersonaggi[index].hpMax / 2) {
-      this.listaPersonaggi[index].pfTmpAttuali = this.listaPersonaggi[index].hpMax / 2;
+    if (this.listaPersonaggi[index].pfTmpAttuali > Math.floor(this.listaPersonaggi[index].hpMax / 2)) {
+      this.listaPersonaggi[index].pfTmpAttuali = Math.floor(this.listaPersonaggi[index].hpMax / 2);
     }
   }
 }

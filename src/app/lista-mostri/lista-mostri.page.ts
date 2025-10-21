@@ -75,6 +75,16 @@ export class ListaMostriPage implements OnInit {
   }
 
   /**
+   * Passando un numero ritorna il suo arrotondamento al valore int più vicino
+   *
+   * @param value Valore da arrotondare
+   * @returns Valore arrotondato
+   */
+  public floor(value: number): number {
+    return Math.floor(value);
+  }
+
+  /**
    * Metodo per calcolare i danni inseriti
    *
    * @param index Indice per pesonaggio su cui aggiungere i danni
